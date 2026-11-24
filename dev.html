@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2a1f44">
+  <meta name="robots" content="noindex">
+  <title>개발자</title>
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin dev-page">
+  <header class="topbar">
+    <div>
+      <h1>개발자</h1>
+      <p class="sub" id="who"></p>
+    </div>
+    <button id="outBtn" class="btn ghost small hidden">로그아웃</button>
+  </header>
+
+  <div id="banners"></div>
+  <section id="gate" class="gate"></section>
+
+  <div id="app" class="hidden">
+    <nav class="tabs" id="nav">
+      <button class="tab active" data-tab="logs">로그인 기록</button>
+      <button class="tab" data-tab="users">사용자·권한</button>
+      <button class="tab" data-tab="orders">주문</button>
+      <button class="tab" data-tab="walkup">현장 주문</button>
+      <button class="tab" data-tab="menu">메뉴</button>
+      <button class="tab" data-tab="accounting">회계 정리</button>
+      <button class="tab" data-tab="stats">매출</button>
+      <button class="tab" data-tab="settings">운영</button>
+      <button class="tab" data-tab="system">시스템</button>
+    </nav>
+    <main>
+      <section id="tab-logs">
+        <div id="logStats" class="stat-grid"></div>
+        <div class="toolbar row-wrap">
+          <input type="search" id="logSearch" placeholder="이메일, 이름 검색">
+          <select id="logType">
+            <option value="">모든 종류</option>
+            <option value="login">로그인</option>
+            <option value="signup">회원가입</option>
+            <option value="session">재방문</option>
+            <option value="logout">로그아웃</option>
+          </select>
+          <select id="logPage">
+            <option value="">모든 화면</option>
+            <option value="order">학생 주문</option>
+            <option value="fund">펀드</option>
+            <option value="dev">개발자</option>
+          </select>
+          <button class="btn small" id="logCsv">CSV 받기</button>
+          <button class="btn ghost small danger" id="logClear">기록 전체 삭제</button>
+        </div>
+        <div class="table-wrap"><table class="table log-table">
+          <thead><tr><th>시간</th><th>이메일</th><th>이름</th><th>종류</th><th>방법</th><th>화면</th><th>기기</th></tr></thead>
+          <tbody id="logRows"></tbody>
+        </table></div>
+        <p class="muted" id="logCount"></p>
+      </section>
+
+      <section id="tab-users" class="hidden">
+        <input type="search" id="userSearch" placeholder="이메일, 이름 검색">
+        <div class="table-wrap"><table class="table">
+          <thead><tr><th>이메일</th><th>이름 / 학년반</th><th>권한</th><th>인증</th><th>마지막 로그인</th><th>로그인 횟수</th><th></th></tr></thead>
+          <tbody id="userRows"></tbody>
+        </table></div>
+      </section>
+
+      <section id="tab-orders" class="hidden"></section>
+      <section id="tab-walkup" class="hidden"></section>
+      <section id="tab-menu" class="hidden"></section>
+      <section id="tab-accounting" class="hidden"></section>
+      <section id="tab-stats" class="hidden"></section>
+      <section id="tab-settings" class="hidden"></section>
+
+      <section id="tab-system" class="hidden">
+        <div class="card">
+          <h3>개발자 계정</h3>
+          <p class="muted">아래 이메일은 역할과 상관없이 모든 권한을 가져요. 바꾸려면 js/config.js와 firestore.rules를 같이 고쳐야 해요.</p>
+          <ul id="devList"></ul>
+        </div>
+        <div class="card">
+          <h3>백업</h3>
+          <p class="muted">사용자, 주문, 메뉴, 로그인 기록 전부를 JSON 파일로 받아요.</p>
+          <button class="btn" id="backupBtn">전체 백업 받기</button>
+        </div>
+        <div class="card hidden" id="demoCard">
+          <h3>데모 초기화</h3>
+          <p class="muted">이 브라우저에 저장된 데모 주문, 사용자, 기록을 모두 지우고 메뉴를 처음 상태로 돌려요.</p>
+          <button class="btn danger" id="resetBtn">데모 데이터 초기화</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="js/dev.js"></script>
+</body>
+</html>
